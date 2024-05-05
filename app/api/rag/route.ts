@@ -12,7 +12,6 @@ import {
 } from "openai-edge";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { ApplicationError, UserError } from "@/lib/errors";
-import { PageChunks } from "@prisma/client";
 import { sql } from "@vercel/postgres";
 
 const openAiKey = process.env.OPENAI_API_KEY;

@@ -12,10 +12,10 @@ import {
 import { PgVectorStorePrisma } from "@/lib/pgPrismaStore";
 import * as cheerio from "cheerio";
 import { NodeHtmlMarkdown, NodeHtmlMarkdownOptions } from "node-html-markdown";
-import * as fs from "fs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 300;
 
 const openAiKey = process.env.OPENAI_API_KEY;
 const pgUrl = process.env.POSTGRES_URL;
