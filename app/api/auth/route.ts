@@ -1,8 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
-
-export const GET = async (req: NextApiRequest, res: NextResponse) => {
-  return NextResponse.json(
+export const GET = async (req: Request, res: Response) => {
+  return Response.json(
     {},
     {
       status: 401,
