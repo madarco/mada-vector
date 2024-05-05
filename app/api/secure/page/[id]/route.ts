@@ -9,15 +9,16 @@ export const DELETE = async (
   if (!id) {
     throw new UserError("Missing Page id");
   }
-  const page = await prisma.page.delete({
-    where: {
-      id,
-    },
-  });
   await prisma.pageChunks.deleteMany({
     where: {
       pageId: id,
     },
   });
+  const page = await prisma.page.delete({
+    where: {
+      id,
+    },
+  });
+
   return Response.json({ page });
 };

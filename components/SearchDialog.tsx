@@ -65,6 +65,9 @@ export function SearchDialog() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (!data.results) {
+          throw new Error("No results found");
+        }
         setPages(data.results);
       })
       .catch((e) => {
@@ -72,7 +75,7 @@ export function SearchDialog() {
       });
   }
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log(query);
     complete(query);
@@ -136,7 +139,7 @@ export function SearchDialog() {
                   }`}
                 />
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-100">
+              <div className="text-xs text-gray-500 dark:text-gray-100 space-2">
                 Or try:{" "}
                 <button
                   type="button"
@@ -145,9 +148,20 @@ export function SearchDialog() {
                   hover:bg-slate-100 dark:hover:bg-gray-600
                   rounded border border-slate-200 dark:border-slate-600
                   transition-colors"
-                  onClick={(_) => setQuery("What are embeddings?")}
+                  onClick={(e) => setQuery("What are embeddings?")}
                 >
                   What are embeddings?
+                </button>{" "}
+                <button
+                  type="button"
+                  className="px-1.5 py-0.5
+                  bg-slate-50 dark:bg-gray-500
+                  hover:bg-slate-100 dark:hover:bg-gray-600
+                  rounded border border-slate-200 dark:border-slate-600
+                  transition-colors"
+                  onClick={(_) => setQuery("When the roman empire ended?")}
+                >
+                  When the roman empire ended?
                 </button>
               </div>
             </div>

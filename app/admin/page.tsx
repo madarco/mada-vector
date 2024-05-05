@@ -49,6 +49,11 @@ export default function Admin() {
     await fetch(`/api/secure/page/${id}/index`, {
       method: "POST",
     });
+    setPages(
+      pages.map((page) =>
+        page.id === id ? { ...page, pageChunks: [null] } : page
+      )
+    );
     setLoadingRow({ [id]: false });
   }
 
