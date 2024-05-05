@@ -14,5 +14,10 @@ export const DELETE = async (
       id,
     },
   });
+  await prisma.pageChunks.deleteMany({
+    where: {
+      pageId: id,
+    },
+  });
   return Response.json({ page });
 };
