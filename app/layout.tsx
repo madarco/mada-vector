@@ -1,24 +1,24 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import { HotToaster } from '../components/hot-toaster'
+import { HotToaster } from "@/components/ui/toaster";
+import "./globals.css";
+import { Inter } from "next/font/google";
 
 export const metadata = {
-  metadataBase: new URL('https://postgres-pgvector.vercel.app'),
-  title: 'Vercel Postgres AI-powered Semantic Search Demo',
+  metadataBase: new URL("https://postgres-pgvector.vercel.app"),
+  title: "MadaVector - Semantic Search with one click",
   description:
-    'A Next.js app that uses Vercel Postgres with pgvector, Prisma, and OpenAI to power a semantic search.',
-}
+    "A one-click install semantic search with Vercel, OpenAI, Llamaindex",
+};
 
 const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-  display: 'swap',
-})
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -27,5 +27,5 @@ export default function RootLayout({
         <HotToaster />
       </body>
     </html>
-  )
+  );
 }

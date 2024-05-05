@@ -1,5 +1,5 @@
-'use client'
-import { Toaster } from 'react-hot-toast'
+"use client";
+import { Toaster } from "react-hot-toast";
 
 export interface HotToasterProps {}
 
@@ -11,16 +11,16 @@ export function HotToaster(props: HotToasterProps) {
       toastOptions={{
         duration: 3000,
         iconTheme: {
-          primary: '#fff',
-          secondary: '#000',
+          primary: "#fff",
+          secondary: "#000",
         },
         style: {
-          background: '#222',
-          color: '#fff',
+          background: "#222",
+          color: "#fff",
         },
       }}
     />
-  )
+  );
 }
 
-HotToaster.displayName = 'HotToaster'
+HotToaster.displayName = "HotToaster";

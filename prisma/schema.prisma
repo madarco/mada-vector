@@ -10,23 +10,22 @@ generator client {
   previewFeatures = ["postgresqlExtensions"]
 }
 
-model Pokemon {
+model Page {
   id         String  @id @default(cuid())
-  number     Int
-  name       String
-  type1      String
-  type2      String?
-  total      Int
-  hp         Int
-  attack     Int
-  defense    Int
-  spAtk      Int
-  spDef      Int
-  speed      Int
-  generation Int
-  legendary  Boolean
+  url        String  @unique
+  title      String?
+
+  pageChunks PageChunks[]
+}
+
+model PageChunks {
+  id         String  @id @default(cuid())
+  pageId     String
+  page       Page    @relation(fields: [pageId], references: [id])
+  document   String
+  meta       Json
 
   embedding Unsupported("vector(1536)")?
 
-  @@map("pokemon")
+  @@map("page_chunks")
 }
