@@ -75,9 +75,14 @@ export function SearchDialog() {
       });
   }
 
+  const queryandSubmit = (query: string) => {
+    setQuery(query);
+    complete(query);
+    search(query);
+  }
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(query);
     complete(query);
     search(query);
   };
@@ -110,9 +115,9 @@ export function SearchDialog() {
       <Dialog open={open}>
         <DialogContent className="sm:max-w-[850px] max-h-[80vh] overflow-y-auto text-black">
           <DialogHeader>
-            <DialogTitle>Vector Embeddings-powered doc search</DialogTitle>
+            <DialogTitle>Vector Embeddings-powered search and Rag</DialogTitle>
             <DialogDescription>
-              Build your own semantic search engine
+              Ask any questions to get answers from the indexed pages.
             </DialogDescription>
             <hr />
             <button
@@ -148,7 +153,7 @@ export function SearchDialog() {
                   hover:bg-slate-100 dark:hover:bg-gray-600
                   rounded border border-slate-200 dark:border-slate-600
                   transition-colors"
-                  onClick={(e) => setQuery("What are embeddings?")}
+                  onClick={(e) => queryandSubmit("What are embeddings?")}
                 >
                   What are embeddings?
                 </button>{" "}
@@ -159,14 +164,14 @@ export function SearchDialog() {
                   hover:bg-slate-100 dark:hover:bg-gray-600
                   rounded border border-slate-200 dark:border-slate-600
                   transition-colors"
-                  onClick={(_) => setQuery("When the roman empire ended?")}
+                  onClick={(_) => queryandSubmit("When the roman empire ended?")}
                 >
                   When the roman empire ended?
                 </button>
               </div>
             </div>
             {query && (
-              <div className="flex gap-4">
+              <div className="flex gap-4 mb-2">
                 <span className="bg-slate-100 dark:bg-slate-300 p-2 w-8 h-8 rounded-full text-center flex items-center justify-center">
                   <User width={18} />{" "}
                 </span>
@@ -209,15 +214,20 @@ export function SearchDialog() {
 
             {pages.length > 0 && (
               <div className="mt-4 border p-4">
-                <h2 className="font-semibold text-lg">Results</h2>
-                <ul className="mt-4">
+                <div className="flex items-center gap-4 dark:text-white">
+                  <span className="bg-cyan-700 p-2 w-8 h-8 rounded-full text-center flex items-center justify-center">
+                    <Search width={18} className="text-white" />
+                  </span>
+                  <h3 className="font-semibold">Results:</h3>
+                </div>
+                <ul className="mt-2">
                   {pages.map((page) => (
                     <li key={page.title} className="py-2">
-                      <h3 className="font-medium underline">
-                        &raquo; <a href={page.url}>{page.title.slice(0, 50)}</a>
-                        <small className="ml-4">{page.score}</small>
+                      <h3 className="font-medium mb-1">
+                        &raquo; <a className="underline" href={page.url}>{page.title.slice(0, 50)}</a>
+                        <small className="ml-4 font-normal float-right">(score: {page.score?.toFixed(3)})</small>
                       </h3>
-                      <p className="italic text-slate-700 dark:text-slate-100">
+                      <p className="italic font-light text-slate-700 dark:text-slate-100">
                         {page.excerpt.slice(page.excerpt.indexOf("\n"))}
                       </p>
                     </li>

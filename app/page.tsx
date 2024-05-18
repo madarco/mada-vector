@@ -9,15 +9,15 @@ export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-evenly">
       <Link
-        href="https://vercel.com/new/clone?repository-url=https://github.com/madarco/mada-vector"
+        href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmadarco%2Fmada-vector&env=OPENAI_API_KEY,ADMIN_USER,ADMIN_PASSWORD&envDescription=Get%20an%20OpenAI%20Api%20Key%20and%20set%20ADMIN_USER%20and%20ADMIN_PASSWORD%20to%20the%20desired%20credentials%20to%20secure%20the%20%2Fadmin%20section.%20Also%20be%20sure%20to%20enable%20the%20Postgres%20database%20integration&envLink=https%3A%2F%2Fplatform.openai.com%2Fapi-keys&demo-title=Mada-Vector%3A%20RAG%20and%20Semantic%20Search&demo-description=%20Llamaindex%20Vercel%20Postgres%20RAG%20and%20Semantic%20Search&demo-url=https%3A%2F%2Fmada-vector.vercel.app%2F&demo-image=https%3A%2F%2Fmada-vector.vercel.app%2Fopengraph-image.png&stores=%5B%7B%22type%22%3A%22postgres%22%7D%5D"
         className="group rounded-full flex space-x-1 bg-white/30 shadow-sm ring-1 ring-gray-900/5 text-gray-600 text-sm font-medium px-10 py-2 hover:shadow-lg active:shadow-sm transition-all"
       >
-        <p>Deploy your own to Vercel</p>
+        <p>One-Click Deploy your own to Vercel</p>
         <ExpandingArrow />
       </Link>
 
       <h1 className="pt-4 pb-8 bg-gradient-to-br from-black via-[#171717] to-[#575757] bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
-        One-click Install Semantic search
+       Self-Hosted Rag Search
       </h1>
 
       <div className="flex flex-col items-center justify-between">
@@ -25,7 +25,7 @@ export default function Home() {
           <div className="flex justify-between items-center align-middle mb-4">
             <div className="space-y-1">
               <h2 className="text-xl font-semibold">
-                Search your site content, semantically
+                Search your site content, and get answers
               </h2>
             </div>
           </div>
@@ -37,7 +37,7 @@ export default function Home() {
               href="/admin"
               className="font-medium underline underline-offset-4 hover:text-black transition-colors"
             >
-              Manage Index
+              Manage Indexed pages
             </Link>
           </div>
         </div>

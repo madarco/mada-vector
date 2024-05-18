@@ -4,9 +4,9 @@ import { Inter } from "next/font/google";
 
 export const metadata = {
   metadataBase: new URL("https://postgres-pgvector.vercel.app"),
-  title: "MadaVector - Semantic Search with one click",
+  title: "MadaVector - Self-Hosted RAG Search with one click",
   description:
-    "A one-click install semantic search with Vercel, OpenAI, Llamaindex",
+    "A one-click install semantic search and RAG with Vercel, OpenAI, Llamaindex",
 };
 
 const inter = Inter({
