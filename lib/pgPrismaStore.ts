@@ -42,6 +42,7 @@ export class PgVectorStorePrisma implements VectorStore {
       }
       //console.log("Inserting", { pageId: row.metadata.pageId });
       const embedding = row.getEmbedding();
+      
       const node = await prisma.pageChunks.create({
         data: {
           page: { connect: { id: row.metadata.pageId } },
@@ -51,9 +52,10 @@ export class PgVectorStorePrisma implements VectorStore {
       });
 
       // Add the embedding
+      const embeddingSql = `[${embedding.join(',')}]`
       await prisma.$executeRaw`
             UPDATE page_chunks
-            SET embedding = ${embedding}::vector
+            SET embedding = ${embeddingSql}::vector
             WHERE id = ${node.id}
             `;
       results.push(node.id);

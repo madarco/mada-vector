@@ -18,8 +18,8 @@ export const POST = async (req: NextRequest) => {
 export const GET = async (req: NextRequest) => {
   const pages = await prisma.page.findMany({
     include: {
-      pageChunks: {
-        take: 1,
+      _count: {
+        select: { pageChunks: true },
       },
     },
   });

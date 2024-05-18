@@ -46,12 +46,13 @@ export default function Admin() {
 
   async function reindex(id: string) {
     setLoadingRow({ [id]: true });
-    await fetch(`/api/secure/page/${id}/index`, {
+    const result = await fetch(`/api/secure/page/${id}/index`, {
       method: "POST",
     });
+    const newPage = (await result.json())?.page;
     setPages(
       pages.map((page) =>
-        page.id === id ? { ...page, pageChunks: [null] } : page
+        page.id === id ? { ...newPage } : page
       )
     );
     setLoadingRow({ [id]: false });
@@ -65,16 +66,6 @@ export default function Admin() {
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-evenly">
-      {/*
-      <Link
-        href="https://vercel.com/templates/next.js/postgres-pgvector"
-        className="group rounded-full flex space-x-1 bg-white/30 shadow-sm ring-1 ring-gray-900/5 text-gray-600 text-sm font-medium px-10 py-2 hover:shadow-lg active:shadow-sm transition-all"
-      >
-        <p>Deploy your own to Vercel</p>
-        <ExpandingArrow />
-      </Link>
-  */}
-
       <div className="flex flex-col items-center justify-between">
         <div className="bg-white p-6 lg:p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg mx-auto w-full">
           <div className="mb-4">
@@ -125,8 +116,12 @@ export default function Admin() {
                                 <div className="inline-block animate-spin relative w-5 h-5 ml-2">
                                   <Loader />
                                 </div>
-                              ) : page.pageChunks.length > 0 ? (
-                                "✅"
+                              ) : page._count.pageChunks > 0 ? (
+                                <abbr
+                                  title={`${page._count.pageChunks} chunks indexed`}
+                                >
+                                  ✅
+                                </abbr>
                               ) : (
                                 "ⓧ"
                               )}

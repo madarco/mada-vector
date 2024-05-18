@@ -86,7 +86,15 @@ export const POST = async (
     content = content.slice(0, CHUNK_SIZE * MAX_CHUNKS);
   }
 
-  console.log("Indexing page", page.url, title, content.length);
+  console.log("Indexing page", {url: page.url, title, bytes: content.length});
+
+  // Clear old chunks:
+  await prisma.pageChunks.deleteMany({
+    where: {
+      pageId: id,
+    },
+  });
+
   // write content to file to debug:
   //fs.writeFileSync("page.md", content);
 
@@ -115,5 +123,5 @@ export const POST = async (
   });
   const nodes = await pipeline.run({ documents: [doc] });
 
-  return Response.json({ page, nodes: nodes.length });
+  return Response.json({ page: { ...page, _count: { pageChunks: nodes.length } } });
 };

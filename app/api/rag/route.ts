@@ -16,6 +16,8 @@ import { sql } from "@vercel/postgres";
 
 const openAiKey = process.env.OPENAI_API_KEY;
 
+const minSimilarity = ".78";
+
 const config = new Configuration({
   apiKey: openAiKey,
 });
@@ -80,7 +82,7 @@ export const POST = async (req: NextRequest) => {
         document,
         1 - (embedding <=> ${vectorQuery}::vector) AS similarity
       FROM page_chunks
-      where 1 - (embedding <=> ${vectorQuery}::vector) > .5
+      where 1 - (embedding <=> ${vectorQuery}::vector) > ${minSimilarity}
       
       ORDER BY similarity DESC
       LIMIT 8;

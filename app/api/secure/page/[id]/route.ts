@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 import { UserError } from "@/lib/errors";
 
+export const dynamic = "force-dynamic";
+
 export const DELETE = async (
   req: Request,
   { params }: { params: { id: string } }
