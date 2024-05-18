@@ -112,36 +112,31 @@ export const POST = async (req: NextRequest) => {
     }
 
     const prompt = codeBlock`
-      ${oneLine`
-        You are a very enthusiastic representative who loves
-        to help people! Given the following sections from a documentation, 
-        answer the question using only that information,
-        outputted in markdown format. If you are unsure and the answer
-        is not explicitly written in the documentation, say
-        "Sorry, I don't know how to help with that."
-      `}
+      You are a very enthusiastic representative who loves
+      to help people! Given the following sections from a documentation, 
+      answer the question using only that information,
+      outputted in markdown format. Use bold and italic to highlight the key concepts and make the text more readable.
+      If you are unsure and the answer is not explicitly written in the documentation, say
+      "Sorry, I don't know how to help with that."
 
       Rules:
-      - Answer as markdown (including related code snippets if available), don't include and Answer section, just the content.
-      - Include at the end the sources used, use a link to the url contained in the pageUrl of the best matched document, with the link text of the pageTitle.
+      - Answer as markdown (including related code snippets if available), don't include an Answer section, just the content.
+      - Include at the end the sources used, use a link to the url contained in the pageUrl of the best matched document, with the link text from the pageTitle.
       - Do not include any sources if not applicable or unsure.
+      - Answer in the same language of the original question even if the Context sections are in a different language.
 
       Context sections:
       ${contextText}
-
-      Question: """
-      ${sanitizedQuery}
-      """
     `;
 
     const chatMessage: ChatCompletionRequestMessage = {
-      role: "user",
+      role: "system",
       content: prompt,
     };
 
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
-      messages: [chatMessage],
+      messages: [chatMessage, { role: "user", content: sanitizedQuery }],
       max_tokens: 512,
       temperature: 0,
       stream: true,
