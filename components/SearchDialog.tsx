@@ -142,6 +142,7 @@ export function SearchDialog() {
               <div className="relative">
                 <Input
                   placeholder="Ask a question..."
+                  autoComplete="off"
                   name="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
