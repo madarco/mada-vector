@@ -87,6 +87,15 @@ export function SearchDialog() {
     search(query);
   };
 
+  function getPageTitle(page: any) {
+    if (page.title.trim()) {
+      page.title.slice(0, 50)
+    }
+    // filename:
+    const url = new URL(page.url)
+    return url.pathname.split('/').pop()
+  }
+
   return (
     <>
       <button
@@ -224,7 +233,7 @@ export function SearchDialog() {
                   {pages.map((page) => (
                     <li key={page.title} className="py-2">
                       <h3 className="font-medium mb-1">
-                        &raquo; <a className="underline" href={page.url}>{page.title.slice(0, 50)}</a>
+                        &raquo; <a className="underline" href={page.url}>{getPageTitle(page)}</a>
                         <small className="ml-4 font-normal float-right">(score: {page.score?.toFixed(3)})</small>
                       </h3>
                       <p className="italic font-light text-slate-700 dark:text-slate-100">
